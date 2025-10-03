@@ -25,23 +25,6 @@ Tech Stack
 
     Templating: Jinja2
 
-Project Structure
-
-The project follows a standard Flask application structure:
-
-/hospital-dashboard
-|-- app.py              # Main Flask application file
-|-- static/
-|   `-- style.css       # All CSS styles
-|-- templates/
-|   |-- base.html           # Base layout template
-|   |-- admin_dashboard.html
-|   |-- doctor_dashboard.html
-|   |-- patient_dashboard.html
-|   |-- login.html
-|   `-- register.html
-|-- requirements.txt    # Project dependencies
-`-- README.md           # This file
 
 Setup and Installation
 
