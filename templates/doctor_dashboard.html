@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block content %}
+<header>
+    <h1>Doctor's Dashboard</h1>
+    <nav>
+        <span style="color: var(--light-text); margin-right: 15px;">Welcome, {{ session.name }}!</span>
+        <a href="{{ url_for('doctor_dashboard') }}" class="active">Dashboard</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
+    </nav>
+</header>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div style="margin-bottom: 20px;">
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endwith %}
+<main class="dashboard-grid-doctor">
+    <div class="card">
+        <h2>Upcoming Appointments</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Patient Name</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for appt in appointments %}
+                <tr>
+                    <td>{{ appt.patient_name }}</td>
+                    <td>{{ appt.date }}</td>
+                    <td>{{ appt.time }}</td>
+                    <td class="actions">
+                        <button class="btn-sm btn-update">update</button>
+                        <button class="btn-sm btn-view">view details</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="card">
+        <h2>Assigned Patients</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Patient Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for patient in patients %}
+                <tr>
+                    <td>{{ patient.name }}</td>
+                    <td class="actions">
+                        <button class="btn-sm btn-view">view</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="card">
+        <h2>Provide Availability</h2>
+        <p>Click to manage your schedule.</p>
+        <button class="btn btn-secondary">Manage Schedule</button>
+    </div>
+</main>
+{% endblock %}
